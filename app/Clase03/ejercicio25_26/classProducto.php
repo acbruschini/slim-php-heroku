@@ -100,6 +100,25 @@ class Producto implements \JsonSerializable
         }
         return $retorno;
     }
+    static function ExisteStock($producto,$nombreArchivo,$cantidad)
+    {
+        $retorno = false;
+        if($producto != null && $nombreArchivo != null && strlen($nombreArchivo) > 5 && $cantidad > 0)
+        {
+            $arrayProductos = array();
+            $arrayProductos = Producto::ExportarJsonArray($nombreArchivo);
+            foreach ($arrayProductos as $productoJson)
+            {
+            	if (Producto::Equals($productoJson,$producto) && intval($productoJson->_stock) >= intval($cantidad))
+                {
+                    $retorno = true;
+                    break;
+                }
+            }
+
+        }
+        return $retorno;
+    }
 
     static function AgregarStock($producto,$nombreArchivo)
     {

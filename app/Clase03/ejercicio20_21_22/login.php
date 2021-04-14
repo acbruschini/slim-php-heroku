@@ -14,7 +14,7 @@ if (isset($_POST["usuario"]) && isset($_POST["clave"]) && isset($_POST["mail"]))
     }
     catch (Exception $ex)
     {
-        die($ex->getMessage());
+        echo($ex->getMessage());
     }
 
     $arrayTest = Usuario::ExportarLista("usuario.csv");
